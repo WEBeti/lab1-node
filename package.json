@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/WEBeti/lab1-node#readme",
   "dependencies": {
+    "dayjs": "^1.10.4",
     "sqlite3": "^5.0.2"
   }
 }
