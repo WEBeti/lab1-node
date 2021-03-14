@@ -1,25 +1,21 @@
 "use strict" ;
 const dayjs = require('dayjs');
 
-const epoch = '1970-01-01';
-function myDateCompare(a,b){
-    return ( a.isSame(epoch) ? 1 : ( b.isSame(epoch) ? -1 : a-b ) );
-}
-
-function Task(id, description, isUrgent, isPrivate, deadline=dayjs(epoch)){
+function Task(id, description, isUrgent, isPrivate, deadline=undefined){
     this.id=id;
     this.description = description;
-    // additional checks on isUrgent and isPrivate being boolean values
-    this.isUrgent = (isUrgent === true ? true : false);
+    this.isUrgent = (isUrgent === true ? true : false);     // additional checks on isUrgent and isPrivate being boolean values
     this.isPrivate = (isPrivate === false ? false : true);
     this.deadline = deadline;
     this.toString = ()=>{ return 'Id: '+ this.id
                                 +', Description: '+ this.description
                                 +', Urgent: '+ this.isUrgent
                                 +', Private: '+ this.isPrivate
-                                +', Deadline: '+ (this.deadline.isSame(epoch) ? '<not defined>' : this.deadline.format()) + '\n'
+                                +', Deadline: '+ (typeof this.deadline == 'undefined' ? '<not defined>' : this.deadline.format()) + '\n'
     }
 }
+
+function myDateCompare(a,b){return typeof a == 'undefined' ? 1 : (typeof b == 'undefined' ? -1 : a-b)}
 
 function TaskList(){
     this.tasks = [];
